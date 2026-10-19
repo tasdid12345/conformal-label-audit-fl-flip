@@ -1,0 +1,31 @@
+{
+  "question": "Can a conformal label-transition audit flag a few label-flipping federated clients among strongly non-IID honest clients more reliably than a standard cosine-similarity update-outlier detector?",
+  "method": "Softmax-regression FedAvg over 20 Dirichlet(0.3) label-skewed clients, 3 flipping labels y->(y+1) mod 10; baseline flags robust z<-2 on cosine(update, median update); improved flags clients whose fraction of labels outside a 90% split-conformal set (leave-one-client-out ensemble, calibrated on a 10% hold-out) exceeds 0.3. Averaged over 3 federation seeds.",
+  "dataset": {
+    "name": "scikit-learn digits (load_digits)",
+    "source_url": "https://scikit-learn.org/stable/datasets/toy_dataset.html",
+    "n_rows": 1797,
+    "n_train": 1437,
+    "n_test": 360,
+    "same_as_paper": false,
+    "baseline_is_papers_method": false
+  },
+  "metric_name": "attacker-detection F1 (label-flipping clients), higher is better",
+  "higher_is_better": true,
+  "baseline": "Cosine-similarity update-outlier detector: robust z-score < -2 on cosine to median update",
+  "improved": "Conformal label-transition audit: flag clients whose fraction of labels outside a 90% leave-one-client-out conformal set exceeds 0.3",
+  "metrics": {
+    "baseline_score": 0.9333333333333332,
+    "improved_score": 0.9523809523809524,
+    "improvement": 0.019047619047619202,
+    "baseline_score_std": 0.09428090415820632,
+    "improved_score_std": 0.0673435029701474,
+    "baseline_auc": 1.0,
+    "improved_auc": 1.0,
+    "baseline_accuracy": 0.763888888888889,
+    "improved_accuracy": 0.7481481481481481,
+    "no_filter_accuracy": 0.7101851851851851,
+    "n_seeds": 3
+  },
+  "notes": "Hyperparameters were fixed a priori and not tuned, so no CV selection was performed. The test set is used only for the final FedAvg accuracy. The paper's exact method details were not available; the improved model is a reconstruction from its name and description. Only 3 seeds and 20 clients per seed, so detection F1 is coarse. The digits dataset is a small stand-in, not the paper's data. Bundled data, so no download retries are needed."
+}
