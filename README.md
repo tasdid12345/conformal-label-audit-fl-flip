@@ -21,6 +21,28 @@ python analysis.py
 
 Results are written to `results.json` (and a chart to `figures/`).
 
+## Results (latest run)
+
+On the scikit-learn digits dataset, the cosine-similarity update-outlier detector reached attacker-detection F1 of 0.93 while the conformal label-transition audit reached 0.95 over 3 seeds, a small gain well within the seed standard deviations (0.09 and 0.07).
+
+| Metric | Value |
+|---|---|
+| baseline_score | 0.9333 |
+| improved_score | 0.9524 |
+| improvement | 0.01905 |
+| baseline_score_std | 0.09428 |
+| improved_score_std | 0.06734 |
+| baseline_auc | 1 |
+| improved_auc | 1 |
+| baseline_accuracy | 0.7639 |
+| improved_accuracy | 0.7481 |
+| no_filter_accuracy | 0.7102 |
+| n_seeds | 3 |
+
+Run on 2026-10-19. Full output: [results.json](results.json) · [run.log](run.log)
+
+Notes: Hyperparameters were fixed a priori and not tuned, so no CV selection was performed. The test set is used only for the final FedAvg accuracy. The paper's exact method details were not available; the improved model is a reconstruction from its name and description. Only 3 seeds and 20 clients per seed, so detection F1 is coarse. The digits dataset is a small stand-in, not the paper's data. Bundled data, so no download retries are needed.
+
 ## Reference
 
 This project is motivated by the following paper:
